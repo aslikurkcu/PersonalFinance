@@ -1,0 +1,109 @@
+
+<div class="class container col-6">
+
+  <div class="ms-2 mt-3 mb-2">
+    {{ displayCount() }} bills are paid.
+  </div>
+
+  <div class="form-check ms-2 mt-2 mb-3">
+    <input class="form-check-input" type="checkbox" [(ngModel)]="displayAll"  value="" id="displayAll">
+    <label for="displayAll" class="form-check-label">Show all</label>
+  </div>
+
+  <div class="alert alert-warning mt-2" *ngIf="getItems().length == 0 else itemsTable">
+    All bills are paid.
+  </div>
+
+ 
+ <ng-template class="mx-auto my-2 p-2" #itemsTable>
+  <table class="table table-bordered table-striped">
+    <ng-container>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>is paid</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let item of getItems(); let i = index" [class]="{ 'bg-primary': item.ispaid, 'bg-warning': !item.ispaid }">
+        <td>{{ i + 1 }}</td>
+        <td>{{ item.type }}</td>
+        <td>{{ item.price }}</td>
+        <td>
+          <div *ngIf="item.ispaid; then yesTemplate else noTemplate">
+            Burası gösterilmez.
+          </div>
+
+          <ng-template #noTemplate>
+            No
+          </ng-template>
+
+          <ng-template #yesTemplate>
+            Yes
+          </ng-template>
+
+        </td>
+        <td>
+          <input type="checkbox" [(ngModel)]="item.ispaid" name="" id="">
+        </td>
+       
+      </tr>
+    </tbody>
+  </ng-container>
+  </table>
+</ng-template>
+
+</div>
+
+<div class="mx-auto my-5 col-3">
+
+  <h5>Add new bill</h5>
+  <div class="input-group mb-3 mt-4">
+    <img src="../../assets/electricity.png" alt="" class="mx-3" width="32px">
+    Electricity
+    <input type="text" class="form-control ms-3"
+      [(ngModel)]="electricity"
+      (keyup.enter)="addelectricityItem();">
+    <button
+    class="btn"
+    (click)="addelectricityItem();">Add</button>
+  </div>
+
+  <div class="input-group mb-3">
+    <img src="../../assets/water.png" alt="" class="mx-3" width="32px">
+    Water
+    <input type="text" class="form-control ms-3"
+      [(ngModel)]="water"
+      (keyup.enter)="addwaterItem();">
+    <button
+    class="btn"
+    (click)="addwaterItem();">Add</button>
+  </div>
+
+
+  <div class="input-group mb-3">
+    <img src="../../assets/flame.png" alt="" class="mx-3" width="32px">
+    Gas
+    <input type="text" class="form-control ms-3"
+      [(ngModel)]="gas"
+      (keyup.enter)="addgasItem();">
+    <button
+    class="btn"
+    (click)="addgasItem();">Add</button>
+</div>
+
+
+<div class="input-group mb-3">
+  <img src="../../assets/other.png" alt="" class="mx-3" width="32px">
+  Other
+    <input type="text" class="form-control ms-3"
+      [(ngModel)]="other"
+      (keyup.enter)="addotherItem();">
+    <button
+    class="btn"
+    (click)="addotherItem();">Add</button>
+  </div>
+</div>

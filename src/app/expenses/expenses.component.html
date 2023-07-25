@@ -1,0 +1,84 @@
+<div class="row mx-auto my-5 w-75 h-100" >
+    <div class="col">
+      <div class="card">
+        <div class="card-body" >
+          
+          <h3>Expenses this month: </h3><br>
+          <div class="chart-container">
+            <canvas  id="MyChart" >{{ chart }}</canvas>
+
+      </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          
+          <h4 class="mx-3">Add new Expense</h4>
+
+          <div class="my-4 mx-auto col-9">
+          <div class="input-group mb-3">
+            <img src="../../assets/shopping.png" alt="" class="me-3" width="30px" height="29">
+            Shopping
+            <input type="text" class="form-control ms-3">
+            <button
+            class="btn">Add</button>
+            <!-- (click)="addelectricityItem();">Add</button> -->
+          </div>
+        
+          <div class="input-group mb-3">
+            <img src="../../assets/car-bus.png" alt="" class="me-3" width="30px" height="29">
+            Transportation
+            <input type="text" class="form-control ms-3">
+              <!-- [(ngModel)]="water"
+              (keyup.enter)="addwaterItem();"> -->
+            <button
+            class="btn">Add</button>
+            <!-- (click)="addwaterItem();">Add</button> -->
+          </div>
+        
+        
+          <div class="input-group mb-3">
+            <img src="../../assets/home.png" alt="" class="me-3" width="30px" height="29">
+            Housing
+            <input type="text" class="form-control ms-3">
+              <!-- [(ngModel)]="gas"
+              (keyup.enter)="addgasItem();"> -->
+            <button
+            class="btn">Add</button>
+            <!-- (click)="addgasItem();">Add</button> -->
+        </div>
+        
+        
+        <div class="input-group mb-3">
+          <img src="../../assets/hamburger-soda.png" alt="" class="me-3" width="30px" height="29">
+
+          Food&Drink  
+          <input type="text" class="form-control ms-3">
+             <!--  [(ngModel)]="other"
+              (keyup.enter)="addotherItem();"> -->  
+            <button
+            class="btn">Add</button>
+            <!-- (click)="addotherItem();">Add</button> -->
+        </div>
+        
+        <div class="input-group mb-3">
+          <img src="../../assets/entertainment.png" alt="" class="me-3" width="30px" height="29">
+          Entertainment  
+          <input type="text" class="form-control ms-3">
+
+             <!--  [(ngModel)]="other"
+              (keyup.enter)="addotherItem();"> -->
+            <button
+            class="btn">Add</button>
+            <!-- (click)="addotherItem();">Add</button> -->
+        </div>
+
+
+      </div>
+
+        </div>
+      </div>
+    </div>
+  </div>

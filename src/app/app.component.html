@@ -1,0 +1,76 @@
+<nav class="navbar bg-primary-subtle navbar-expand-sm">
+  <div class="container">
+    <a [routerLink]="['/dashboard']"
+    routerLinkActive="router-link-active" class="navbar-brand">
+      <div><img src="../assets/bank2.png" width="32px" /> Home</div>
+    </a>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a
+          [routerLink]="['/bills']"
+          routerLinkActive="router-link-active"
+          class="nav-link"
+        >
+          <div><img src="../assets/bills.png" width="20px" alt="" /> Bills</div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          [routerLink]="['/wallet']"
+          routerLinkActive="router-link-active"
+          class="nav-link"
+        >
+          <div>
+            <img src="../assets/wallet.png" width="20px" alt="" /> Wallet
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          [routerLink]="['/expenses']"
+          routerLinkActive="router-link-active"
+          class="nav-link"
+        >
+          <div>
+            <img src="../assets/chart-pie.png" width="20px" alt="" /> Expenses
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          [routerLink]="['/investments']"
+          routerLinkActive="router-link-active"
+          class="nav-link"
+        >
+          <div>
+            <img src="../assets/piggy-bank.png" width="22px" alt="" />
+            Investments
+          </div>
+        </a>
+      </li>
+
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a
+          [routerLink]="['/profile']"
+          routerLinkActive="router-link-active"
+          class="nav-link"
+        >
+          <div>
+            <img src="../assets/user-gear.png" width="20px" alt="" /> Profile
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="" class="nav-link">
+          <div>
+            <img src="../assets/sign-out-alt.png" width="20px" alt="" /> Logout
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
