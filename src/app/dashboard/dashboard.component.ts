@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
 
 @Component({
@@ -6,14 +6,14 @@ import Chart from 'chart.js/auto';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   title = 'ng-chart';
   expenseschart: any = [];
   investchart: any = [];
- 
+
   constructor() {}
 
-  ngOnInit() {
+  ngOnInit() : void{
     this.expenseschart = new Chart('canvas', {
       type: 'bar',
       data: {
@@ -60,6 +60,5 @@ export class DashboardComponent {
 
   }
 
-  
 
 }

@@ -58,12 +58,13 @@
           class="nav-link"
         >
           <div>
-            <img src="../assets/user-gear.png" width="20px" alt="" /> Profile
+            <img src="../assets/user-gear.png" width="20px" alt="" /> {{username()}}
           </div>
         </a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">
+        <a (click)="logout()" [routerLink]="['/home']"
+        routerLinkActive="router-link-active"  class="nav-link">
           <div>
             <img src="../assets/sign-out-alt.png" width="20px" alt="" /> Logout
           </div>
@@ -72,5 +73,4 @@
     </ul>
   </div>
 </nav>
-
 <router-outlet></router-outlet>

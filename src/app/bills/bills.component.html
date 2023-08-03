@@ -14,7 +14,7 @@
     All bills are paid.
   </div>
 
- 
+
  <ng-template class="mx-auto my-2 p-2" #itemsTable>
   <table class="table table-bordered table-striped">
     <ng-container>
@@ -34,7 +34,6 @@
         <td>{{ item.price }}</td>
         <td>
           <div *ngIf="item.ispaid; then yesTemplate else noTemplate">
-            Burası gösterilmez.
           </div>
 
           <ng-template #noTemplate>
@@ -49,7 +48,7 @@
         <td>
           <input type="checkbox" [(ngModel)]="item.ispaid" name="" id="">
         </td>
-       
+
       </tr>
     </tbody>
   </ng-container>

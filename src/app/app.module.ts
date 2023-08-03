@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BillsComponent } from './bills/bills.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +10,10 @@ import { InvestmentsComponent } from './investments/investments.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
+import { AuthGuard } from './guards/auth-guard';
 
 
 @NgModule({
@@ -20,16 +24,21 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ExpensesComponent,
     InvestmentsComponent,
     ProfileComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
+
   ],
-  providers: [],
-  bootstrap: 
+  providers: [AuthGuard],
+  bootstrap:
     [AppComponent,
     BillsComponent,
     WalletComponent,

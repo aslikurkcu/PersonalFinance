@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { BillsModel } from '../billsmodel';
+import { BillsService } from '../services/bills.service';
+import { BillsItem } from '../billsitem';
 
 @Component({
   selector: 'app-bills',
@@ -12,48 +14,34 @@ export class BillsComponent {
   water: number;
   gas: number;
   other: number;
-  
-  constructor() {}
 
-  billsmodel = new BillsModel();
- 
+  constructor(private billService : BillsService) {}
+
+
   getItems() {
-    if(this.displayAll) {
-      return this.billsmodel.items;
-    }
-    return this.billsmodel.items.filter(item => !item.ispaid);
+    return this.billService.getItems(this.displayAll);
   }
 
   displayCount() {
-    return this.billsmodel.items.filter(i=>i.ispaid).length;
+    return this.billService.displayCount();
   }
 
   addelectricityItem() {
-    if(this.electricity!=null) {
-      this.billsmodel.items.push({ type: "electricity", price: this.electricity, ispaid: false});
-      this.electricity = null;
-    }
+    return this.billService.addelectricityItem(this.electricity);
   }
 
   addwaterItem() {
-    if(this.water!=null) {
-      this.billsmodel.items.push({ type: "water", price: this.water, ispaid: false});
-      this.water = null;
-    }
+    return this.billService.addwaterItem(this.water);
   }
 
   addgasItem() {
-    if(this.gas!=null) {
-      this.billsmodel.items.push({ type: "gas", price: this.gas, ispaid: false});
-      this.gas = null;
-    }
+    return this.billService.addgasItem(this.gas);
   }
 
   addotherItem() {
-    if(this.other!=null) {
-      this.billsmodel.items.push({ type: "other", price: this.other, ispaid: false});
-      this.other = null;
-    }
+    return this.billService.addotherItem(this.other);
   }
-  
+
+
+
 }

@@ -1,0 +1,22 @@
+<div class="wrapper">
+  <div class="logo">
+      <img src="../../assets/user.png" alt="">
+  </div>
+  <div class="text-center mt-4 name">
+  </div>
+  <form #form ="ngForm" class="p-3 mt-3" (ngSubmit) ="login()"  >
+      <div class="form-field d-flex align-items-center">
+          <input required type="text" name="userName" id="userName" placeholder="Username" [(ngModel)]="model.username">
+      </div>
+      <div class="form-field d-flex align-items-center">
+          <input required minlength=6 type="password" name="password" id="pwd" placeholder="Password" [(ngModel)]="model.password">
+      </div>
+      <button [disabled]="form.invalid" class="btn mt-3" >Login</button>
+  </form>
+  <div class="text-center fs-7">
+       <a [routerLink]="['/register']"
+       routerLinkActive="router-link-active"
+      >Don't have an account? Sign up</a>
+
+  </div>
+</div>

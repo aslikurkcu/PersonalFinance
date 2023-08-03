@@ -7,15 +7,22 @@ import { InvestmentsComponent } from './investments/investments.component';
 import { ProfileComponent } from './profile/profile.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
+import { AuthGuard } from './guards/auth-guard';
 
 const routes: Routes = [
-  { path: 'bills', component: BillsComponent },
-  { path: 'expenses', component: ExpensesComponent },
-  { path: 'investments', component: InvestmentsComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'wallet', component: WalletComponent },
-  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-  { path: 'dashboard', component: DashboardComponent }
+  { path: 'bills', component: BillsComponent, canActivate: [AuthGuard] },
+  { path: 'expenses', component: ExpensesComponent, canActivate: [AuthGuard] },
+  { path: 'investments', component: InvestmentsComponent , canActivate: [AuthGuard]},
+  { path: 'profile', component: ProfileComponent , canActivate: [AuthGuard]},
+  { path: 'wallet', component: WalletComponent , canActivate: [AuthGuard]},
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'home', component: HomeComponent }
 ];
 
 @NgModule({

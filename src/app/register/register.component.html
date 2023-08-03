@@ -1,0 +1,24 @@
+<div class="wrapper">
+  <div class="text-center mt-4 name">
+  </div>
+  <form class="p-3 mt-3" (ngSubmit) ="register()">
+      <div class="form-field d-flex align-items-center" >
+          <input type="text" name="userName" id="userName" placeholder="Username" [(ngModel)]="model.name">
+      </div>
+      <div class="form-field d-flex align-items-center">
+        <input type="email" name="email" id="email" placeholder="Email" [(ngModel)]="model.email">
+      </div>
+      <div class="form-field d-flex align-items-center">
+          <input type="password" name="password" id="pwd" placeholder="Password" [(ngModel)]="model.password">
+      </div>
+      <div class="form-field d-flex align-items-center">
+        <input type="number" name="income" id="income" placeholder="Income" [(ngModel)]="model.income">
+    </div>
+      <button class="btn mt-3">Sign Up</button>
+  </form>
+  <div class="text-center fs-7">
+    <a [routerLink]="['/home']"
+    routerLinkActive="router-link-active"
+   >Have an account? Sign in</a>
+  </div>
+</div>
