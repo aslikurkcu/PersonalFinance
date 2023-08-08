@@ -1,15 +1,15 @@
 import { BillsItem } from './billsitem';
 
 export class BillsModel {
-  items: BillsItem[];
+  bills: Array<BillsItem>;
 
   constructor() {
-    this.items = [
-      { type: 'electricity', price: 56.89, ispaid: false },
-      { type: 'water', price: 76.89, ispaid: false },
-      { type: 'gas', price: 45.99, ispaid: false },
-      { type: 'other', price: 81.5, ispaid: false },
-      { type: 'other', price: 71.5, ispaid: true },
-    ];
+     /* this.bills = [
+      { Bill_Type: 'electricity', Amount: 56.89, Paid: false },
+      { Bill_Type: 'water', Amount: 76.89, Paid: false },
+      { Bill_Type: 'gas', Amount: 45.99, Paid: false },
+      { Bill_Type: 'other', Amount: 81.5, Paid: false },
+      { Bill_Type: 'other', Amount: 71.5, Paid: true },
+    ]; */
   }
 }

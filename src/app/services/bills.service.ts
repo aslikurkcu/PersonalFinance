@@ -1,7 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { BillsModel } from '../billsmodel';
+import { BillsItem } from '../billsitem';
+import { AuthService } from './auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -9,49 +12,107 @@ import { BillsModel } from '../billsmodel';
 export class BillsService {
 
   baseUrl:string = "http://localhost:5280/api/bills/";
+  jwtHelper = new JwtHelperService();
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient,public authService: AuthService){}
 
   billsmodel = new BillsModel();
 
 
-  getItems(displayAll: boolean) {
-    if(displayAll) {
-      return this.billsmodel.items;
+  user_Id() {
+    const token = localStorage.getItem("token");
+    this.authService.decodedToken = this.jwtHelper.decodeToken(token);
+    return this.authService.decodedToken.nameid;
+
+  }
+
+  getItems(displayAll: Boolean) : Observable<BillsItem[]> {
+
+    let queryParams = new HttpParams().append("user_id",this.user_Id());
+    var b = this.http.get<BillsItem[]>(this.baseUrl +'getbills',{params:queryParams});
+
+    if(displayAll){
+      return b;
     }
-    return this.billsmodel.items.filter(item => !item.ispaid);
+    return b.pipe(map((items: BillsItem[]) => items.filter((item: BillsItem) => !item.paid)));
+
   }
 
-  displayCount() {
-    return this.billsmodel.items.filter(i=>i.ispaid).length;
+
+  displayCount() : Observable<BillsItem[]> {
+
+    let queryParams = new HttpParams().append("user_id",this.user_Id());
+    var b = this.http.get<BillsItem[]>(this.baseUrl +'getbills',{params:queryParams});
+
+    return b.pipe(map((items: BillsItem[]) => items.filter((item: BillsItem) => item.paid)));
+
   }
 
-  addelectricityItem(electricity: number) {
+  updateBill(billId: number, isPaid: boolean): Observable<any> {
+
+    const url = this.baseUrl + "UpdateBill";
+    const body = { Bill_id: billId, Paid: isPaid };
+    //data = JSON.stringify(data);
+
+    const headers =new HttpHeaders({
+      'Content-Type': "application/json"
+    });
+    //let queryParams = new HttpParams().append("billId", billId).append("ispaid", isPaid)
+
+    return this.http.put(url, body, {headers});
+  }
+
+
+  addelectricityItem(electricity: number): Observable<any>  {
     if(electricity!=null) {
-      this.billsmodel.items.push({ type: "electricity", price: electricity, ispaid: false});
-      electricity = null;
+
+      const body = { user_id: this.user_Id(), bill_type: "electricity", amount: electricity };
+      const headers =new HttpHeaders({
+        'Content-Type': "application/json"
+      });
+
+      return this.http.put(this.baseUrl + "InsertBill",body, {headers} );
     }
+    return null ;
   }
 
-  addwaterItem(water: number) {
+  addwaterItem(water: number) : Observable<any>  {
     if(water!=null) {
-      this.billsmodel.items.push({ type: "water", price: water, ispaid: false});
-      water = null;
+
+      const body = { user_id: this.user_Id(), bill_type: "water", amount: water };
+      const headers =new HttpHeaders({
+        'Content-Type': "application/json"
+      });
+
+      return this.http.put(this.baseUrl + "InsertBill",body, {headers} );
     }
+    return null ;
   }
 
-  addgasItem(gas: number) {
+  addgasItem(gas: number) : Observable<any>  {
     if(gas!=null) {
-      this.billsmodel.items.push({ type: "gas", price: gas, ispaid: false});
-      gas = null;
+
+      const body = { user_id: this.user_Id(), bill_type: "gas", amount: gas };
+      const headers =new HttpHeaders({
+        'Content-Type': "application/json"
+      });
+
+      return this.http.put(this.baseUrl + "InsertBill",body, {headers} );
     }
+    return null ;
   }
 
-  addotherItem(other: number) {
+  addotherItem(other: number) : Observable<any>  {
     if(other!=null) {
-      this.billsmodel.items.push({ type: "other", price: other, ispaid: false});
-      other = null;
+
+      const body = { user_id: this.user_Id(), bill_type: "other", amount: other };
+      const headers =new HttpHeaders({
+        'Content-Type': "application/json"
+      });
+
+      return this.http.put(this.baseUrl + "InsertBill",body, {headers} );
     }
+    return null ;
   }
 
 }

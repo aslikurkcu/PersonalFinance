@@ -2,22 +2,22 @@
 <div class="class container col-6">
 
   <div class="ms-2 mt-3 mb-2">
-    {{ displayCount() }} bills are paid.
+     {{ billsForCount.length }} bills are paid.
   </div>
 
   <div class="form-check ms-2 mt-2 mb-3">
-    <input class="form-check-input" type="checkbox" [(ngModel)]="displayAll"  value="" id="displayAll">
+    <input class="form-check-input" type="checkbox" [checked]="displayAll" (change)="handleDisplayAllChange($event)"  value="" id="displayAll">
     <label for="displayAll" class="form-check-label">Show all</label>
   </div>
-
-  <div class="alert alert-warning mt-2" *ngIf="getItems().length == 0 else itemsTable">
+  {{displayAll}}
+  <div class="alert alert-warning mt-2" *ngIf="bills.length == 0 else itemsTable">
     All bills are paid.
   </div>
-
 
  <ng-template class="mx-auto my-2 p-2" #itemsTable>
   <table class="table table-bordered table-striped">
     <ng-container>
+
     <thead>
       <tr>
         <th></th>
@@ -28,12 +28,12 @@
     </thead>
     <tbody>
       <tr
-        *ngFor="let item of getItems(); let i = index" [class]="{ 'bg-primary': item.ispaid, 'bg-warning': !item.ispaid }">
+        *ngFor="let item of bills; let i = index" [class]="{ 'bg-primary': item.paid, 'bg-warning': !item.paid }">
         <td>{{ i + 1 }}</td>
-        <td>{{ item.type }}</td>
-        <td>{{ item.price }}</td>
+        <td>{{ item.bill_Type }}</td>
+        <td>{{ item.amount }}</td>
         <td>
-          <div *ngIf="item.ispaid; then yesTemplate else noTemplate">
+          <div *ngIf="item.paid; then yesTemplate else noTemplate">
           </div>
 
           <ng-template #noTemplate>
@@ -46,7 +46,7 @@
 
         </td>
         <td>
-          <input type="checkbox" [(ngModel)]="item.ispaid" name="" id="">
+          <input type="checkbox"  [(ngModel)]="item.paid" (change)="onCheckboxChange(item);" name="" id="">
         </td>
 
       </tr>
@@ -65,10 +65,10 @@
     Electricity
     <input type="text" class="form-control ms-3"
       [(ngModel)]="electricity"
-      (keyup.enter)="addelectricityItem();">
+      (keyup.enter)="addElectricity();">
     <button
     class="btn"
-    (click)="addelectricityItem();">Add</button>
+    (click)="addElectricity();">Add</button>
   </div>
 
   <div class="input-group mb-3">
@@ -76,10 +76,10 @@
     Water
     <input type="text" class="form-control ms-3"
       [(ngModel)]="water"
-      (keyup.enter)="addwaterItem();">
+      (keyup.enter)="addWater();">
     <button
     class="btn"
-    (click)="addwaterItem();">Add</button>
+    (click)="addWater();">Add</button>
   </div>
 
 
@@ -88,10 +88,10 @@
     Gas
     <input type="text" class="form-control ms-3"
       [(ngModel)]="gas"
-      (keyup.enter)="addgasItem();">
+      (keyup.enter)="addGas();">
     <button
     class="btn"
-    (click)="addgasItem();">Add</button>
+    (click)="addGas();">Add</button>
 </div>
 
 
@@ -100,9 +100,9 @@
   Other
     <input type="text" class="form-control ms-3"
       [(ngModel)]="other"
-      (keyup.enter)="addotherItem();">
+      (keyup.enter)="addOther();">
     <button
     class="btn"
-    (click)="addotherItem();">Add</button>
+    (click)="addOther();" >Add</button>
   </div>
 </div>

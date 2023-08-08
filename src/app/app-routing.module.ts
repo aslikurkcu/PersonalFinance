@@ -13,8 +13,8 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './guards/auth-guard';
 
 const routes: Routes = [
-  { path: 'bills', component: BillsComponent, canActivate: [AuthGuard] },
   { path: 'expenses', component: ExpensesComponent, canActivate: [AuthGuard] },
+  { path: 'bills', component: BillsComponent, canActivate: [AuthGuard] },
   { path: 'investments', component: InvestmentsComponent , canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent , canActivate: [AuthGuard]},
   { path: 'wallet', component: WalletComponent , canActivate: [AuthGuard]},
