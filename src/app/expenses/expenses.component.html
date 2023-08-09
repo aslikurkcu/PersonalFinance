@@ -2,7 +2,7 @@
     <div class="col">
       <div class="card">
         <div class="card-body" >
-          
+
           <h3>Expenses this month: </h3><br>
           <div class="chart-container">
             <canvas  id="MyChart" >{{ chart }}</canvas>
@@ -14,7 +14,7 @@
     <div class="col">
       <div class="card">
         <div class="card-body">
-          
+
           <h4 class="mx-3">Add new Expense</h4>
 
           <div class="my-4 mx-auto col-9">
@@ -26,7 +26,7 @@
             class="btn">Add</button>
             <!-- (click)="addelectricityItem();">Add</button> -->
           </div>
-        
+
           <div class="input-group mb-3">
             <img src="../../assets/car-bus.png" alt="" class="me-3" width="30px" height="29">
             Transportation
@@ -37,8 +37,8 @@
             class="btn">Add</button>
             <!-- (click)="addwaterItem();">Add</button> -->
           </div>
-        
-        
+
+
           <div class="input-group mb-3">
             <img src="../../assets/home.png" alt="" class="me-3" width="30px" height="29">
             Housing
@@ -49,23 +49,23 @@
             class="btn">Add</button>
             <!-- (click)="addgasItem();">Add</button> -->
         </div>
-        
-        
+
+
         <div class="input-group mb-3">
           <img src="../../assets/hamburger-soda.png" alt="" class="me-3" width="30px" height="29">
 
-          Food&Drink  
+          Food&Drink
           <input type="text" class="form-control ms-3">
              <!--  [(ngModel)]="other"
-              (keyup.enter)="addotherItem();"> -->  
+              (keyup.enter)="addotherItem();"> -->
             <button
             class="btn">Add</button>
             <!-- (click)="addotherItem();">Add</button> -->
         </div>
-        
+
         <div class="input-group mb-3">
           <img src="../../assets/entertainment.png" alt="" class="me-3" width="30px" height="29">
-          Entertainment  
+          Entertainment
           <input type="text" class="form-control ms-3">
 
              <!--  [(ngModel)]="other"
@@ -82,3 +82,28 @@
       </div>
     </div>
   </div>
+
+
+
+ <!--  <div>
+    <table>
+      <thead>
+        <tr>
+        <th></th>
+        <th>type</th>
+        <th>amount</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr
+        *ngFor="let item of expenses; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ item.expense_type }}</td>
+        <td>{{ item.amount }}</td>
+      </tr>
+
+    </tbody>
+
+    </table>
+  </div> -->

@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { BillsModel } from '../billsmodel';
-import { BillsItem } from '../billsitem';
+import { BillsModel } from '../bills/billsmodel';
+import { BillsItem } from '../bills/billsitem';
 import { AuthService } from './auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -16,7 +16,7 @@ export class BillsService {
 
   constructor(private http: HttpClient,public authService: AuthService){}
 
-  billsmodel = new BillsModel();
+  //billsmodel = new BillsModel();
 
 
   user_Id() {
@@ -27,7 +27,7 @@ export class BillsService {
   }
 
   getItems(displayAll: Boolean) : Observable<BillsItem[]> {
-
+    debugger;
     let queryParams = new HttpParams().append("user_id",this.user_Id());
     var b = this.http.get<BillsItem[]>(this.baseUrl +'getbills',{params:queryParams});
 

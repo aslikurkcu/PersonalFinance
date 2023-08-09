@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy} from '@angular/core';
 import { BillsService } from '../services/bills.service';
-import { BillsItem } from '../billsitem';
+import { BillsItem } from './billsitem';
 import { AuthService } from '../services/auth.service';
 
 
@@ -65,8 +65,8 @@ export class BillsComponent {
 
   async onCheckboxChange(item: BillsItem) {
       await this.updateBill(item.bill_id, item.paid);
-      /*await this.getItems();
-      await this.displayCount();*/
+      await this.getItems();
+      await this.displayCount();
 
   }
 

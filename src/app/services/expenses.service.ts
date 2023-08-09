@@ -1,18 +1,24 @@
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, forkJoin, map } from 'rxjs';
 import { AuthService } from './auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ExpenseItem } from '../expenses/expenseItem';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExpensesService {
 
+
+
   baseUrl:string = "http://localhost:5280/api/expenses/";
   jwtHelper = new JwtHelperService();
 
-  constructor(private http: HttpClient,public authService: AuthService){}
+  constructor(private http: HttpClient,public authService: AuthService){
+
+
+  }
 
   user_Id() {
     const token = localStorage.getItem("token");
@@ -20,6 +26,23 @@ export class ExpensesService {
     return this.authService.decodedToken.nameid;
 
   }
+
+  getItems() : Observable<ExpenseItem[]> {
+
+    let queryParams = new HttpParams().append("user_id", this.user_Id());
+    var e = this.http.get<ExpenseItem[]>(this.baseUrl +'GetExpenses',{params:queryParams});
+    var b = this.http.get<ExpenseItem[]>("http://localhost:5280/api/bills/GetPaidBills",{params:queryParams});
+
+
+      return forkJoin([e, b]).pipe(
+        map(([e, b]) => [...e, ...b])
+      );
+
+  }
+
+
+
+
 
   addshoppingItem(shopping: number): Observable<any>  {
     if(shopping!=null) {
