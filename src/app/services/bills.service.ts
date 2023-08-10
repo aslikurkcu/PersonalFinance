@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { BillsModel } from '../bills/billsmodel';
 import { BillsItem } from '../bills/billsitem';
 import { AuthService } from './auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -15,9 +14,6 @@ export class BillsService {
   jwtHelper = new JwtHelperService();
 
   constructor(private http: HttpClient,public authService: AuthService){}
-
-  //billsmodel = new BillsModel();
-
 
   user_Id() {
     const token = localStorage.getItem("token");
@@ -52,12 +48,10 @@ export class BillsService {
 
     const url = this.baseUrl + "UpdateBill";
     const body = { Bill_id: billId, Paid: isPaid };
-    //data = JSON.stringify(data);
 
     const headers =new HttpHeaders({
       'Content-Type': "application/json"
     });
-    //let queryParams = new HttpParams().append("billId", billId).append("ispaid", isPaid)
 
     return this.http.put(url, body, {headers});
   }

@@ -34,42 +34,10 @@ export class BillsComponent {
     }
   }
 
-  async addElectricity(){
-    await this.addelectricityItem();
-    await this.getItems();
-    await this.displayCount();
-    this.electricity = null;
-  }
-
-  async addWater(){
-    await this.addwaterItem();
-    await this.getItems();
-    await this.displayCount();
-    this.water = null;
-  }
-
-  async addGas(){
-    await this.addgasItem();
-    await this.getItems();
-    await this.displayCount();
-    this.gas = null;
-  }
-
-  async addOther(){
-    await this.addotherItem();
-    await this.getItems();
-    await this.displayCount();
-    this.other = null;
-  }
-
-
   async onCheckboxChange(item: BillsItem) {
-      await this.updateBill(item.bill_id, item.paid);
-      await this.getItems();
-      await this.displayCount();
+    this.updateBill(item.bill_id, item.paid);
 
   }
-
 
   async getItems() {
     this.billService.getItems(this.displayAll).subscribe(bills => {
@@ -89,6 +57,8 @@ export class BillsComponent {
   async updateBill(billId: number, isPaid: boolean) {
     return this.billService.updateBill(billId, isPaid).subscribe(
       () => {
+      this.getItems();
+      this.displayCount();
         console.log('Bill status updated successfully.');
       },
       (error) => {
@@ -101,23 +71,27 @@ export class BillsComponent {
   async addelectricityItem() {
     return this.billService.addelectricityItem(this.electricity).subscribe(
       () => {
+      this.getItems();
+      this.displayCount();
+      this.electricity = null;
         console.log('Bill added successfully.');
       },
       (error) => {
-        console.error('Failed to add bill status:', error);
+        console.error('Failed to add bill :', error);
       }
     );
-
-
   }
 
   async addwaterItem() {
     return this.billService.addwaterItem(this.water).subscribe(
       () => {
+        this.getItems();
+        this.displayCount();
+        this.water = null;
         console.log('Bill added successfully.');
       },
       (error) => {
-        console.error('Failed to add bill status:', error);
+        console.error('Failed to add bill:', error);
       }
     );
   }
@@ -125,10 +99,13 @@ export class BillsComponent {
   async addgasItem() {
     return this.billService.addgasItem(this.gas).subscribe(
       () => {
+        this.getItems();
+        this.displayCount();
+        this.gas = null;
         console.log('Bill added successfully.');
       },
       (error) => {
-        console.error('Failed to add bill status:', error);
+        console.error('Failed to add bill :', error);
       }
     );
   }
@@ -136,10 +113,13 @@ export class BillsComponent {
   async addotherItem() {
       return this.billService.addotherItem(this.other).subscribe(
       () => {
+        this.getItems();
+        this.displayCount();
+        this.other = null;
         console.log('Bill added successfully.');
       },
       (error) => {
-        console.error('Failed to add bill status:', error);
+        console.error('Failed to add bill :', error);
       }
     );
   }

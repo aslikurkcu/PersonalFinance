@@ -10,70 +10,66 @@ import { ExpenseItem } from './expenseItem';
 })
 export class ExpensesComponent {
   public chart: any;
-  expense : any;
   shopping: number;
   transportation: number;
   housing: number;
   foodDrink: number;
   entertainment: number;
   bill: number;
-  expenses: ExpenseItem[]  = [];
-  chartData: number[] = [];
-
-  constructor(private expensesService : ExpensesService) {
+  expenses: ExpenseItem[];
+  chartData: number[];
 
 
-
-  }
-
-  async display(){
-    debugger;
-    await this.getItems();
-    this.createData(this.expenses);
-    this.createChart();
-
-  }
+constructor(private expensesService : ExpensesService) {}
 
 
- async getItems() {
-    debugger;
+getItems(){
     this.expensesService.getItems().subscribe(expenses => {
       this.expenses = expenses;
+      this.createData(this.expenses);
+      this.updateChart(this.chartData);
+
     });
   }
 
   createData( expenseList : ExpenseItem[]){
-  this.shopping = 0;
-  this.transportation= 0;
-  this.housing= 0;
-  this.foodDrink = 0;
-  this.entertainment = 0;
-  this.bill = 0;
+
+    var shopping = 0;
+    var transportation = 0;
+    var housing = 0;
+    var foodDrink = 0;
+    var entertainment = 0;
+    var bill = 0;
 
     for(var item of expenseList){
       if(item.expense_type == "shopping"){
-        this.shopping += item.amount;
+        shopping += item.amount;
 
       }else if(item.expense_type == "transportation"){
-        this.transportation += item.amount;
+        transportation += item.amount;
 
       }else if(item.expense_type == "housing"){
-        this.housing += item.amount;
+        housing += item.amount;
 
       }else if(item.expense_type == "foodDrink"){
-        this.foodDrink += item.amount;
+        foodDrink += item.amount;
 
       }else if(item.expense_type == "entertainment"){
-        this.entertainment += item.amount;
+        entertainment += item.amount;
 
       }else if(item.expense_type == "bill"){
-        this.bill += item.amount;
+        bill += item.amount;
 
       }
     }
+    this.chartData = [shopping,transportation,housing,foodDrink,entertainment,bill];
 
-    this.chartData = [this.shopping,this.transportation,this.housing,this.foodDrink,this.entertainment,this.bill];
+  }
 
+  updateChart(array :any) {
+
+    this.chart.data.datasets[0].data = array;
+    this.chart.update();
   }
 
 
@@ -86,7 +82,7 @@ export class ExpensesComponent {
         labels: ['Shopping','Transportation','Housing','Food&Drink','Entertainment', 'Bills'],
 	       datasets: [{
     label: 'Dataset',
-    data: this.chartData,
+    data: [10,120,150,420,410,100],
     backgroundColor: [
       'lightblue',
       '#F2EE9D',
@@ -105,9 +101,75 @@ export class ExpensesComponent {
     });
   }
 
-  ngOnInit(): void {
-    this.display();
 
+  async addtransportationItem() {
+    return this.expensesService.addtransportationItem(this.transportation).subscribe(
+      () => {
+        this.getItems();
+        this.transportation= null;
+        console.log('Expense added successfully.');
+      },
+      (error) => {
+        console.error('Failed to add expense:', error);
+      }
+    );
+  }
+
+  async addhousingItem() {
+    return this.expensesService.addhousingItem(this.housing).subscribe(
+      () => {
+        this.getItems();
+        this.housing= null;
+        console.log('Expense added successfully.');
+      },
+      (error) => {
+        console.error('Failed to add expense:', error);
+      }
+    );
+  }
+
+  async addfoodDrinkItem() {
+    return this.expensesService.addfoodDrinkItem(this.foodDrink).subscribe(
+      () => {
+        this.getItems();
+        this.foodDrink= null;
+        console.log('Expense added successfully.');
+      },
+      (error) => {
+        console.error('Failed to add expense:', error);
+      }
+    );
+  }
+
+  async addentertainmentItem() {
+    return this.expensesService.addentertainmentItem(this.entertainment).subscribe(
+      () => {
+        this.getItems();
+        this.entertainment= null;
+        console.log('Expense added successfully.');
+      },
+      (error) => {
+        console.error('Failed to add expense:', error);
+      }
+    );
+  }
+
+  async addshoppingItem() {
+    return this.expensesService.addshoppingItem(this.shopping).subscribe(
+      () => {
+        this.getItems();
+        this.shopping= null;
+        console.log('Expense added successfully.');
+      },
+      (error) => {
+        console.error('Failed to add expense:', error);
+      }
+    );
+  }
+
+  ngOnInit(): void {
+    this.createChart();
+    this.getItems();
 
   }
 

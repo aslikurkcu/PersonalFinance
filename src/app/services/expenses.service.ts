@@ -15,10 +15,8 @@ export class ExpensesService {
   baseUrl:string = "http://localhost:5280/api/expenses/";
   jwtHelper = new JwtHelperService();
 
-  constructor(private http: HttpClient,public authService: AuthService){
+  constructor(private http: HttpClient,public authService: AuthService){ }
 
-
-  }
 
   user_Id() {
     const token = localStorage.getItem("token");
@@ -37,10 +35,7 @@ export class ExpensesService {
       return forkJoin([e, b]).pipe(
         map(([e, b]) => [...e, ...b])
       );
-
   }
-
-
 
 
 
@@ -52,7 +47,7 @@ export class ExpensesService {
         'Content-Type': "application/json"
       });
 
-      return this.http.put(this.baseUrl + "InsertExpense",body, {headers} );
+      return this.http.put(this.baseUrl + "InsertExpense", body, {headers} );
     }
     return null ;
   }
@@ -108,8 +103,5 @@ export class ExpensesService {
     }
     return null ;
   }
-
-
-
 
 }

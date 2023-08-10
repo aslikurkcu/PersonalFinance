@@ -34,6 +34,7 @@ export class InvestmentsService {
     return null ;
   }
 
+
   addeuroInvest(euro: number): Observable<any>  {
     if(euro!=null) {
 
@@ -47,10 +48,11 @@ export class InvestmentsService {
     return null ;
   }
 
+
   addxauInvest(xau: number): Observable<any>  {
     if(xau!=null) {
 
-      const body = { user_id: this.user_Id(), invest_type: "xau", amount: xau };
+      const body = { user_id: this.user_Id(), invest_type: "XAU", amount: xau };
       const headers =new HttpHeaders({
         'Content-Type': "application/json"
       });

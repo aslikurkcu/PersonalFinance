@@ -8,53 +8,59 @@
                 <div class="chart-container h-100">
                     <canvas  id="MyChart" >{{ linechart }}</canvas>
                 </div>
-          
+
             </div>
         </div>
     </div>
 
-    
+
     <div class="col">
         <div class="card">
             <div class="card-body mx-3 my-3">
 
                 <h4>Add new Investment </h4>
-          
+
                 <div class="col-10 mx-auto">
                 <div class="input-group mb-3 mt-4">
-                    
+
                     <img src="../../assets/usd.png" alt="" class="me-2" width="30px" height="28">
-                    Dollar : 
-                    <input type="text" class="form-control ms-3">
+                    Dollar :
+                    <input type="text" class="form-control ms-3"
+                      [(ngModel)]="dollar"
+                      (keyup.enter)="adddollarInvest();">
                     <button
-                    class="btn">Add</button>
-                    <!-- (click)="addelectricityItem();">Add</button> -->
-                    
+                      class="btn"
+                      (click)="adddollarInvest();">Add</button>
                 </div>
+
                 <div class="input-group mb-3">
-                    
+
                     <img src="../../assets/euro.png" alt="" class="me-2" width="30px" height="28">
-                    Euro : 
-                    <input type="text" class="form-control ms-3">
+                    Euro :
+                    <input type="text" class="form-control ms-3"
+                      [(ngModel)]="euro"
+                      (keyup.enter)="addeuroInvest();">
                     <button
-                    class="btn">Add</button>
-                    <!-- (click)="addelectricityItem();">Add</button> -->
-                    
+                      class="btn"
+                      (click)="addeuroInvest();">Add</button>
                 </div>
+
+
                 <div class="input-group mb-3">
-                    
+
                     <img src="../../assets/gold.png" alt="" class="me-2" width="30px" height="28">
-                    XAU : 
-                    <input type="text" class="form-control ms-3">
+                    XAU :
+                    <input type="text" class="form-control ms-3"
+                      [(ngModel)]="xau"
+                      (keyup.enter)="addxauInvest();">
                     <button
-                    class="btn">Add</button>
-                    <!-- (click)="addelectricityItem();">Add</button> -->
-                    
+                      class="btn"
+                      (click)="addxauInvest();">Add</button>
                 </div>
 
             </div>
 
-            
+
 
 
             </div>
