@@ -21,6 +21,19 @@ export class InvestmentsService {
 
   }
 
+  getInvestmentsByType() : Observable<any> {
+
+    let queryParams = new HttpParams().append("user_id", this.user_Id());
+    return this.http.get<any>(this.baseUrl + 'GetInvestmentsDailyByType' ,{params:queryParams});
+
+  }
+
+  getInvestmentsMonthly () :Observable<any>{
+
+    let queryParams = new HttpParams().append("user_id", this.user_Id());
+    return this.http.get<any>(this.baseUrl + 'GetInvestmentsMonthly' ,{params:queryParams});
+  }
+
   adddollarInvest(dollar: number): Observable<any>  {
     if(dollar!=null) {
 

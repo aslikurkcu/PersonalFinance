@@ -17,6 +17,7 @@ export class WalletComponent implements OnInit {
   constructor(private expensesService : ExpensesService, private billService : BillsService, private walletService : WalletService) { }
 
   ngOnInit(): void {
+    this.createChart();
     this.getNetWorth();
     this.getTotalExpense();
     this.getUnpaidBills();
@@ -54,7 +55,7 @@ export class WalletComponent implements OnInit {
   }
 
   getIncome() {
-    this.walletService.getUserIncome().subscribe(
+    this.walletService.getUser().subscribe(
       (data) => {
         this.income = data.income;
       },
@@ -80,9 +81,8 @@ export class WalletComponent implements OnInit {
           incomeforChart = incomeforChart - combinedList[a];
           netWorth.push(incomeforChart);
         }
-        debugger;
         this.networthnow = netWorth[30];
-        this.createChart(netWorth);
+        this.updateChart(netWorth);
 
 
       },
@@ -93,9 +93,15 @@ export class WalletComponent implements OnInit {
     );
   }
 
+  updateChart(array :any) {
+
+    this.chart.data.datasets[0].data = array;
+    this.chart.update();
+  }
 
 
-  createChart(array :any) {
+
+  createChart() {
 
     this.chart = new Chart("MyChart", {
       type: 'line',
@@ -109,7 +115,9 @@ export class WalletComponent implements OnInit {
         datasets: [
           {
             label: "Net Worth",
-            data: array,
+            data:
+            [12000, 11500, 11450, 11400, 11100, 11000, 10950, 10890, 10600, 10360, 6300, 6190, 6080, 5985, 5870, 5790,
+            5600, 5350, 5240, 5050, 4860, 4750, 4620, 4300, 3830, 3300, 3150, 2860, 2400, 2210, 1860 ],
             backgroundColor: '#ACB1D6',
             borderColor: "#73777B"
           }

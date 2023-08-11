@@ -23,7 +23,6 @@ export class BillsService {
   }
 
   getItems(displayAll: Boolean) : Observable<BillsItem[]> {
-    debugger;
     let queryParams = new HttpParams().append("user_id",this.user_Id());
     var b = this.http.get<BillsItem[]>(this.baseUrl +'getbills',{params:queryParams});
 

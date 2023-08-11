@@ -15,38 +15,58 @@ export class InvestmentsComponent {
   dollar : number;
   euro : number;
   xau : number;
+  totalDollar : number = 0;
+  totalEuro : number = 0;
+  totalXau : number = 0;
+  investments : any  = {};
+  dollarList : any[] = [];
+  euroList : any[] = [];
+  xauList: any[] = [];
 
 
   ngOnInit(): void {
     this.createChart();
+    this.getInvestmentsByType();
   }
 
 
   createChart(){
 
     this.linechart = new Chart("MyChart", {
-      type: 'line', //this denotes tha type of chart
+      type: 'line',
 
-      data: {// values on X-Axis
-        labels: ['2022-05-10', '2022-05-11', '2022-05-12','2022-05-13',
-								 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ],
+      data: {
+        labels: ["1", "2", "3", "4", "5", "6", "7",
+        "8", "9", "10", "11", "12", "13", "14",
+        "15", "16", "17", "18", "19", "20", "21",
+        "22", "23", "24", "25", "26", "27", "28",
+        "29", "30", "31"],
 	       datasets: [
           {
             label: "Dollar",
-            data: ['467','576', '595', '675', '750',
-								 '720', '850', '986'],
+            data: ['100','100', '120', '130', '130',
+								 '130', '135', '135','140','140', '140', '140', '140',
+								 '200', '200', '220','220','220', '250', '250', '250',
+								 '250', '250', '250','450','450', '570', '570', '570',
+								 '570', '570'],
             backgroundColor: '#6528F7'
           },
           {
             label: "Euro",
-            data: ['340', '620', '670', '690', '710',
-									 '790', '830', '1100'],
+            data: ['50','50', '50', '50', '130',
+            '130', '130', '130','170','170', '250', '250', '250',
+            '250', '250', '270','270','270', '270', '270', '270',
+            '300', '300', '300','300','300', '430', '430', '500',
+            '570', '570'],
             backgroundColor: '#9AC5F4'
           } ,
           {
             label: "XAU",
-            data: ['140', '320', '400', '480', '550',
-									 '660', '750', '870'],
+            data:['70','120', '120', '120', '180',
+            '180', '180', '180','200','200', '200', '200', '260',
+            '260', '300', '300','300','300', '300', '300', '300',
+            '350', '350', '350','350','350', '350', '410', '410',
+            '570', '570'],
             backgroundColor: '#FF9B9B'
           }
         ]
@@ -58,11 +78,38 @@ export class InvestmentsComponent {
     });
   }
 
+  getInvestmentsByType(){
+    return this.investmentsService.getInvestmentsByType().subscribe(data => {
+      this.investments = data;
+       for (var item of data.dollar){
+        this.totalDollar += item;
+        this.dollarList.push(this.totalDollar);
+      }
+      for (var item of data.euro){
+        this.totalEuro += item;
+        this.euroList.push(this.totalEuro);
+      }
+      for (var item of data.XAU){
+        this.totalXau += item;
+        this.xauList.push(this.totalXau);
+      }
+      this.updateChart(this.dollarList,this.euroList,this.xauList);
+    });
+  }
+
+  updateChart(array1 :any, array2 :any, array3 :any) {
+
+    this.linechart.data.datasets[0].data = array1;
+    this.linechart.data.datasets[1].data = array2;
+    this.linechart.data.datasets[2].data = array3;
+    this.linechart.update();
+  }
 
   async adddollarInvest() {
     return this.investmentsService.adddollarInvest(this.dollar).subscribe(
       () => {
         this.dollar= null;
+        this.getInvestmentsByType();
         console.log('Investment added successfully.');
       },
       (error) => {
@@ -75,6 +122,7 @@ export class InvestmentsComponent {
     return this.investmentsService.addeuroInvest(this.euro).subscribe(
       () => {
         this.euro= null;
+        this.getInvestmentsByType();
         console.log('Investment added successfully.');
       },
       (error) => {
@@ -87,6 +135,7 @@ export class InvestmentsComponent {
     return this.investmentsService.addxauInvest(this.xau).subscribe(
       () => {
         this.xau= null;
+        this.getInvestmentsByType();
         console.log('Investment added successfully.');
       },
       (error) => {

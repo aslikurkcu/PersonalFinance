@@ -23,8 +23,7 @@ export class WalletService {
 
   }
 
-  getUserIncome() : Observable<any> {
-    debugger;
+  getUser() : Observable<any> {
 
     let queryParams = new HttpParams().append("user_id", this.user_Id());
     return this.http.get<any>(this.baseUrl + 'Users/GetUserById' ,{params:queryParams});

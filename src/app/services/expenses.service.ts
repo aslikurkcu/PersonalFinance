@@ -25,6 +25,13 @@ export class ExpensesService {
 
   }
 
+  getExpensesMonthly () :Observable<any>{
+
+    let queryParams = new HttpParams().append("user_id", this.user_Id());
+    return this.http.get<any>(this.baseUrl + 'GetExpensesMonthly' ,{params:queryParams});
+  }
+
+
   getItems() : Observable<ExpenseItem[]> {
 
     let queryParams = new HttpParams().append("user_id", this.user_Id());
